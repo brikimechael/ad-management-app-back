@@ -43,4 +43,16 @@ public class AdController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteAd(@PathVariable Long id) {
+        Optional<Ad> existingAd = adService.getAdById(id);
+
+        if (existingAd.isPresent()) {
+            adService.deleteAd(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

@@ -44,4 +44,12 @@ public class AdService {
         }
     }
 
+    public void deleteAd(Long id) {
+        if (adRepository.existsById(id)) {
+            adRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Ad not found with id: " + id);
+        }
+    }
+
 }
