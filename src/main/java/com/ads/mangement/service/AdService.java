@@ -27,5 +27,21 @@ public class AdService {
     public Optional<Ad> getAdById(Long id) {
         return adRepository.findById(id);
     }
+    public Ad updateAd(Long id, Ad updatedAd) {
+        Optional<Ad> existingAdOptional = adRepository.findById(id);
+
+        if (existingAdOptional.isPresent()) {
+            Ad existingAd = existingAdOptional.get();
+            existingAd.setName(updatedAd.getName());
+            existingAd.setPrice(updatedAd.getPrice());
+            existingAd.setCategory(updatedAd.getCategory());
+            existingAd.setDescription(updatedAd.getDescription());
+            existingAd.setPicture(updatedAd.getPicture());
+
+            return adRepository.save(existingAd);
+        } else {
+            throw new RuntimeException("Ad not found with id: " + id);
+        }
+    }
 
 }

@@ -31,4 +31,16 @@ public class AdController {
         return ad.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Ad> updateAd(@PathVariable Long id, @RequestBody Ad updatedAd) {
+        Optional<Ad> existingAd = adService.getAdById(id);
+
+        if (existingAd.isPresent()) {
+            Ad savedAd = adService.updateAd(id, updatedAd);
+            return ResponseEntity.ok(savedAd);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
