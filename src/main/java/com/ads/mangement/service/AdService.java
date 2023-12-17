@@ -37,6 +37,8 @@ public class AdService {
             existingAd.setCategory(updatedAd.getCategory());
             existingAd.setDescription(updatedAd.getDescription());
             existingAd.setPicture(updatedAd.getPicture());
+            existingAd.setLocation(updatedAd.getLocation());
+            existingAd.setStillAvailable(updatedAd.isStillAvailable());
 
             return adRepository.save(existingAd);
         } else {
